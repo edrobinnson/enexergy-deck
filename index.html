@@ -1,0 +1,2981 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enxergy — Pre-IPO Investment Memorandum</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #060606;
+    --off-black: #0d0d0d;
+    --deep: #111111;
+    --panel: #161616;
+    --border: rgba(255,255,255,0.07);
+    --border-light: rgba(255,255,255,0.12);
+    --white: #f5f2ec;
+    --cream: #e8e3d8;
+    --muted: rgba(245,242,236,0.45);
+    --faint: rgba(245,242,236,0.18);
+    --green: #2d6a4f;
+    --green-bright: #40916c;
+    --green-glow: rgba(64,145,108,0.15);
+    --green-mid: #52b788;
+    --accent: #b7e4c7;
+    --gold: #c9a84c;
+    --gold-faint: rgba(201,168,76,0.12);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: rgba(6,6,6,0.92);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    color: var(--white);
+    text-transform: uppercase;
+  }
+
+  .nav-logo span { color: var(--green-mid); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  .nav-cta {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--green-mid);
+    padding: 10px 22px;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--accent); }
+
+  /* SECTIONS */
+  section { position: relative; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 48px 80px;
+    overflow: hidden;
+    background: var(--black);
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 70% 40%, rgba(40,110,75,0.13) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(40,90,65,0.08) 0%, transparent 60%);
+  }
+
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+    background-size: 80px 80px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 28px;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 8vw, 110px);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.35s forwards;
+  }
+
+  .hero-headline em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  .hero-sub {
+    font-size: 15px;
+    font-weight: 400;
+    color: var(--muted);
+    max-width: 560px;
+    line-height: 1.7;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.5s forwards;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border-light);
+    width: fit-content;
+    opacity: 0;
+    animation: fadeUp 0.9s 0.65s forwards;
+  }
+
+  .hero-stat {
+    padding: 28px 48px;
+    border-right: 1px solid var(--border-light);
+  }
+
+  .hero-stat:last-child { border-right: none; }
+
+  .hero-stat-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .hero-stat-val span { color: var(--green-mid); }
+
+  .hero-stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    right: 48px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    opacity: 0;
+    animation: fadeIn 1s 1.2s forwards;
+  }
+
+  .hero-scroll span {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--faint);
+    writing-mode: vertical-rl;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--green-mid), transparent);
+    animation: scrollPulse 2s infinite;
+  }
+
+  /* THESIS */
+  #thesis {
+    padding: 140px 48px;
+    background: var(--off-black);
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--green-mid);
+  }
+
+  .section-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .section-headline em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  .thesis-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .thesis-body {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(245,242,236,0.7);
+    font-weight: 400;
+  }
+
+  .thesis-body p + p { margin-top: 20px; }
+
+  .thesis-points {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .thesis-point {
+    padding: 28px 32px;
+    background: var(--panel);
+    border-left: 2px solid var(--green);
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .thesis-point:hover {
+    border-color: var(--green-mid);
+    background: rgba(22,22,22,0.9);
+  }
+
+  .thesis-point-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green-mid);
+    letter-spacing: 0.15em;
+    margin-bottom: 10px;
+  }
+
+  .thesis-point-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+  }
+
+  .thesis-point-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* WHAT IS IT */
+  #what {
+    padding: 140px 48px;
+    background: var(--black);
+  }
+
+  .what-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .process-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .process-step {
+    display: flex;
+    gap: 24px;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+
+  .process-step:first-child { padding-top: 0; }
+
+  .step-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--green);
+    line-height: 1;
+    min-width: 48px;
+    opacity: 0.5;
+  }
+
+  .step-content {}
+
+  .step-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .what-right {}
+
+  .yield-block {
+    background: var(--panel);
+    border: 1px solid var(--border-light);
+    padding: 48px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .yield-block::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, var(--green-mid), transparent);
+  }
+
+  .yield-big {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 80px;
+    font-weight: 300;
+    color: var(--green-mid);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .yield-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+  }
+
+  .stat-cell {
+    background: var(--panel);
+    padding: 28px 32px;
+  }
+
+  .stat-cell-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .stat-cell-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* REVENUE */
+  #revenue {
+    padding: 140px 48px;
+    background: var(--off-black);
+  }
+
+  .revenue-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .revenue-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .rev-bar-item {}
+
+  .rev-bar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+  }
+
+  .rev-bar-name {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  .rev-bar-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--green-mid);
+  }
+
+  .rev-bar-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .rev-bar-track {
+    height: 3px;
+    background: var(--border-light);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .rev-bar-fill {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    background: var(--green-mid);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .rev-bar-fill.animated { transform: scaleX(1); }
+
+  .rev-bar-fill.pdo { width: 65%; }
+  .rev-bar-fill.prn { width: 20%; }
+  .rev-bar-fill.gate { width: 15%; }
+
+  .revenue-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .pl-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 28px;
+    background: var(--panel);
+  }
+
+  .pl-row.total {
+    background: rgba(64,145,108,0.1);
+    border: 1px solid rgba(64,145,108,0.2);
+  }
+
+  .pl-row.ebitda {
+    background: rgba(64,145,108,0.18);
+    border: 1px solid rgba(64,145,108,0.35);
+  }
+
+  .pl-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+  }
+
+  .pl-row.total .pl-label,
+  .pl-row.ebitda .pl-label {
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .pl-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 300;
+    color: var(--white);
+  }
+
+  .pl-row.ebitda .pl-val { color: var(--green-mid); }
+
+  .pl-margin {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green-mid);
+    letter-spacing: 0.12em;
+    margin-left: 12px;
+  }
+
+  /* MARKET */
+  #market {
+    padding: 140px 48px;
+    background: var(--black);
+  }
+
+  .market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 64px;
+  }
+
+  .market-card {
+    background: var(--panel);
+    padding: 48px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+
+  .market-card:hover { background: #1a1a1a; }
+
+  .market-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--green);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .market-card:hover::after { transform: scaleX(1); }
+
+  .market-card-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--green-mid);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .market-card-unit {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  .market-card-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 12px;
+  }
+
+  .market-card-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* GEOPOLITICAL */
+  #geo {
+    padding: 140px 48px;
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .geo-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(40,100,70,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .geo-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .geo-body {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(245,242,236,0.65);
+  }
+
+  .geo-body p + p { margin-top: 18px; }
+
+  .geo-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--white);
+    border-left: 2px solid var(--green-mid);
+    padding-left: 32px;
+    margin: 40px 0;
+  }
+
+  .geo-events {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .geo-event {
+    padding: 24px 28px;
+    background: var(--panel);
+    border-left: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .geo-event:hover { border-color: var(--green-mid); }
+
+  .geo-event-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+
+  .geo-event-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .geo-moat {
+    margin-top: 32px;
+    padding: 40px;
+    background: rgba(64,145,108,0.08);
+    border: 1px solid rgba(64,145,108,0.2);
+  }
+
+  .geo-moat-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 16px;
+  }
+
+  .moat-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .moat-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    font-size: 13px;
+    color: rgba(245,242,236,0.7);
+    line-height: 1.5;
+  }
+
+  .moat-item::before {
+    content: '—';
+    color: var(--green-mid);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* CAPITAL STRUCTURE */
+  #capital {
+    padding: 140px 48px;
+    background: var(--off-black);
+  }
+
+  .capital-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+  }
+
+  .capital-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .capital-tranche {
+    background: var(--panel);
+    padding: 32px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .capital-tranche::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 3px;
+    background: var(--green);
+  }
+
+  .capital-tranche.primary::before { background: var(--green-mid); }
+
+  .tranche-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 10px;
+  }
+
+  .tranche-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 44px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .tranche-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+
+  .capital-total {
+    background: rgba(64,145,108,0.12);
+    border: 1px solid rgba(64,145,108,0.25);
+    padding: 32px 36px;
+    margin-top: 16px;
+  }
+
+  .capital-total-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 8px;
+  }
+
+  .capital-total-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 56px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .capital-total-note {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 8px;
+  }
+
+  .capital-right {}
+
+  .spv-explainer {
+    padding: 40px;
+    border: 1px solid var(--border-light);
+    margin-bottom: 24px;
+  }
+
+  .spv-title {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 14px;
+  }
+
+  .spv-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .timeline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline-items::before {
+    content: '';
+    position: absolute;
+    left: 20px; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border-light);
+  }
+
+  .tl-item {
+    display: flex;
+    gap: 24px;
+    padding: 20px 0;
+    align-items: flex-start;
+    position: relative;
+  }
+
+  .tl-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--green);
+    flex-shrink: 0;
+    margin-top: 4px;
+    position: relative;
+    z-index: 1;
+    margin-left: 14px;
+    transition: background 0.3s;
+  }
+
+  .tl-item:hover .tl-dot { background: var(--green-mid); }
+
+  .tl-content {}
+
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 4px;
+  }
+
+  .tl-event {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .tl-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* ROADMAP */
+  #roadmap {
+    padding: 140px 48px;
+    background: var(--black);
+  }
+
+  .roadmap-phases {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 64px;
+  }
+
+  .phase-card {
+    background: var(--panel);
+    padding: 40px 32px;
+    position: relative;
+  }
+
+  .phase-card.active {
+    background: rgba(64,145,108,0.06);
+  }
+
+  .phase-card.active::before {
+    content: 'CURRENT';
+    position: absolute;
+    top: 16px; right: 16px;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--green-mid);
+    background: rgba(64,145,108,0.15);
+    padding: 4px 10px;
+  }
+
+  .phase-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--green-mid);
+    margin-bottom: 12px;
+  }
+
+  .phase-title {
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--white);
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .phase-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .phase-item {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .phase-item::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 5px;
+    height: 1px;
+    background: var(--green);
+  }
+
+  /* GROWTH CHART */
+  .growth-chart {
+    margin-top: 64px;
+    padding: 48px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+  }
+
+  .chart-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    height: 200px;
+    margin-bottom: 16px;
+  }
+
+  .chart-bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .chart-bar-wrap {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 180px;
+  }
+
+  .chart-bar {
+    width: 20px;
+    border-radius: 1px 1px 0 0;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .chart-bar.animated { transform: scaleY(1); }
+
+  .bar-rev { background: var(--green-mid); }
+  .bar-ebt { background: rgba(64,145,108,0.35); }
+
+  .chart-year {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-align: center;
+  }
+
+  .chart-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    color: var(--white);
+    text-align: center;
+  }
+
+  /* PRE-IPO */
+  #preiipo {
+    padding: 140px 48px;
+    background: var(--deep);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .preiipo-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(40,100,70,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .preiipo-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .preiipo-body {
+    font-size: 16px;
+    line-height: 1.85;
+    color: rgba(245,242,236,0.65);
+  }
+
+  .preiipo-body p + p { margin-top: 18px; }
+
+  .preiipo-advantages {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .advantage {
+    padding: 28px 32px;
+    background: var(--panel);
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: background 0.3s;
+  }
+
+  .advantage:hover { background: #1a1a1a; }
+
+  .advantage::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, var(--green-mid), transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  .advantage:hover::before { opacity: 1; }
+
+  .adv-title {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+  }
+
+  .adv-body {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* LSE EXIT */
+  #exit {
+    padding: 140px 48px;
+    background: var(--off-black);
+  }
+
+  .exit-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .exit-comparison {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-bottom: 32px;
+  }
+
+  .exit-col {
+    background: var(--panel);
+    padding: 32px 28px;
+  }
+
+  .exit-col.good { background: rgba(64,145,108,0.07); }
+
+  .exit-col-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .exit-col.bad .exit-col-title { color: rgba(255,255,255,0.3); }
+  .exit-col.good .exit-col-title { color: var(--green-mid); }
+
+  .exit-items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .exit-item {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .exit-col.bad .exit-item::before {
+    content: '×';
+    position: absolute;
+    left: 0;
+    color: rgba(200,80,80,0.5);
+  }
+
+  .exit-col.good .exit-item::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--green-mid);
+  }
+
+  .lse-block {
+    padding: 48px;
+    background: rgba(64,145,108,0.08);
+    border: 1px solid rgba(64,145,108,0.2);
+  }
+
+  .lse-block-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 300;
+    color: var(--white);
+    margin-bottom: 16px;
+  }
+
+  .lse-block-body {
+    font-size: 14px;
+    color: rgba(245,242,236,0.65);
+    line-height: 1.75;
+  }
+
+  /* INVESTMENT TERMS */
+  #terms {
+    padding: 140px 48px;
+    background: var(--black);
+  }
+
+  .terms-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .terms-card {
+    background: var(--panel);
+    border: 1px solid var(--border-light);
+    padding: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .terms-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(to right, var(--green-mid), var(--green));
+  }
+
+  .terms-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 72px;
+    font-weight: 300;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .terms-price-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 40px;
+  }
+
+  .terms-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .terms-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .terms-row:last-child { border-bottom: none; }
+
+  .terms-row-label {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  .terms-row-val {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+    text-align: right;
+  }
+
+  .returns-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .return-item {
+    background: var(--panel);
+    padding: 32px 36px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-left: 2px solid var(--green);
+    transition: border-color 0.3s;
+  }
+
+  .return-item:hover { border-color: var(--green-mid); }
+
+  .return-horizon {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .return-context {
+    font-size: 12px;
+    color: rgba(245,242,236,0.4);
+    max-width: 200px;
+    line-height: 1.4;
+  }
+
+  .return-pct {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--green-mid);
+    line-height: 1;
+    text-align: right;
+  }
+
+  .return-pct span {
+    font-size: 24px;
+    color: var(--muted);
+  }
+
+  /* TEAM */
+  #team {
+    padding: 140px 48px;
+    background: var(--off-black);
+  }
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    margin-top: 64px;
+  }
+
+  .team-card {
+    background: var(--panel);
+    padding: 40px 36px;
+    transition: background 0.3s;
+  }
+
+  .team-card:hover { background: #1a1a1a; }
+
+  .team-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .team-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .team-bio {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  /* URGENCY */
+  #urgency {
+    padding: 140px 48px;
+    background: var(--black);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .urgency-bg {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 80% at 50% 50%, rgba(40,100,70,0.05) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .urgency-layout {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+    align-items: start;
+  }
+
+  .urgency-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    margin-bottom: 32px;
+  }
+
+  .urgency-headline em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  .urgency-body {
+    font-size: 15px;
+    line-height: 1.85;
+    color: rgba(245,242,236,0.65);
+  }
+
+  .urgency-body p + p { margin-top: 18px; }
+
+  .window-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
+
+  .window-stage {
+    padding: 24px 28px;
+    background: var(--panel);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    border-left: 2px solid transparent;
+    transition: border-color 0.3s;
+  }
+
+  .window-stage:hover { border-color: var(--green-mid); }
+
+  .window-stage.closed { opacity: 0.35; }
+
+  .stage-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--green-mid);
+  }
+
+  .stage-content {}
+
+  .stage-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .stage-note {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .stage-price {
+    margin-left: auto;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: var(--green-mid);
+    flex-shrink: 0;
+  }
+
+  .window-stage.closed .stage-price { color: var(--muted); }
+
+  /* CTA */
+  #cta {
+    padding: 160px 48px;
+    background: var(--off-black);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 60% at 50% 50%, rgba(40,100,70,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .cta-headline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 88px);
+    font-weight: 300;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--white);
+    margin-bottom: 24px;
+    position: relative;
+  }
+
+  .cta-headline em {
+    font-style: italic;
+    color: var(--green-mid);
+  }
+
+  .cta-sub {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 500px;
+    margin: 0 auto 56px;
+    line-height: 1.7;
+    position: relative;
+  }
+
+  .cta-buttons {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    position: relative;
+  }
+
+  .btn-primary {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--green-mid);
+    padding: 18px 48px;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: var(--accent); }
+
+  .btn-secondary {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: transparent;
+    padding: 18px 48px;
+    border: 1px solid var(--border-light);
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--green-mid);
+    color: var(--green-mid);
+  }
+
+  .cta-disclaimer {
+    margin-top: 48px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,242,236,0.2);
+    letter-spacing: 0.08em;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 40px 48px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--black);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .footer-logo span { color: var(--green-mid); }
+
+  .footer-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: rgba(245,242,236,0.15);
+    letter-spacing: 0.08em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* =============================================
+     MOBILE STYLES — max-width: 768px
+  ============================================= */
+
+  /* Hamburger button — hidden on desktop */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  /* Mobile nav drawer */
+  .nav-drawer {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(6,6,6,0.98);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 80px 32px 40px;
+  }
+
+  .nav-drawer.open { display: flex; }
+
+  .nav-drawer a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--white);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+
+  .nav-drawer a:hover { color: var(--green-mid); }
+
+  .nav-drawer .drawer-cta {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--black);
+    background: var(--green-mid);
+    padding: 16px 40px;
+    margin-top: 8px;
+  }
+
+  @media (max-width: 768px) {
+
+    /* NAV */
+    nav {
+      padding: 16px 20px;
+    }
+
+    .nav-links,
+    .nav-cta {
+      display: none;
+    }
+
+    .nav-hamburger {
+      display: flex;
+    }
+
+    /* HERO */
+    #hero {
+      padding: 0 20px 60px;
+      min-height: 100svh;
+      padding-top: 80px;
+      justify-content: flex-end;
+    }
+
+    .hero-tag {
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      margin-bottom: 20px;
+    }
+
+    .hero-headline {
+      font-size: clamp(44px, 13vw, 68px);
+      margin-bottom: 16px;
+    }
+
+    .hero-sub {
+      font-size: 14px;
+      margin-bottom: 36px;
+      max-width: 100%;
+    }
+
+    .hero-stats {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--border-light);
+    }
+
+    .hero-stat {
+      padding: 20px 16px;
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+    }
+
+    .hero-stat:nth-child(2),
+    .hero-stat:nth-child(4) { border-right: none; }
+
+    .hero-stat:nth-child(3),
+    .hero-stat:nth-child(4) { border-bottom: none; }
+
+    .hero-stat-val { font-size: 28px; }
+    .hero-stat-label { font-size: 9px; }
+
+    .hero-scroll { display: none; }
+
+    /* SECTIONS — shared */
+    #thesis, #what, #revenue, #market, #geo,
+    #capital, #roadmap, #preiipo, #exit,
+    #terms, #team, #urgency {
+      padding: 80px 20px;
+    }
+
+    #cta { padding: 100px 20px; }
+
+    .section-headline {
+      font-size: clamp(30px, 8vw, 48px);
+      margin-bottom: 24px;
+    }
+
+    /* THESIS */
+    .thesis-grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .thesis-body { font-size: 14px; }
+
+    .thesis-point { padding: 22px 20px; }
+
+    /* WHAT */
+    .what-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .step-num { font-size: 32px; min-width: 36px; }
+    .yield-big { font-size: 64px; }
+    .yield-block { padding: 32px; }
+
+    .stat-row { grid-template-columns: 1fr 1fr; }
+    .stat-cell { padding: 20px; }
+    .stat-cell-val { font-size: 24px; }
+
+    /* REVENUE */
+    .revenue-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .rev-bar-pct { font-size: 22px; }
+    .pl-val { font-size: 20px; }
+
+    /* MARKET */
+    .market-grid {
+      grid-template-columns: 1fr;
+      margin-top: 40px;
+    }
+
+    .market-card { padding: 32px 24px; }
+    .market-card-num { font-size: 44px; }
+
+    /* Regulatory tailwinds 4-col → 1-col */
+    #market > div:last-child > div {
+      grid-template-columns: 1fr !important;
+    }
+
+    /* GEO */
+    .geo-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .geo-body { font-size: 14px; }
+
+    .geo-quote {
+      font-size: 22px;
+      padding-left: 20px;
+      margin: 28px 0;
+    }
+
+    .geo-event { padding: 20px; }
+    .geo-moat { padding: 24px; }
+
+    /* CAPITAL */
+    .capital-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .tranche-amount { font-size: 36px; }
+    .capital-total-val { font-size: 44px; }
+    .spv-explainer { padding: 24px; }
+
+    .timeline-items::before { left: 14px; }
+    .tl-dot { margin-left: 8px; }
+
+    /* ROADMAP */
+    .roadmap-phases {
+      grid-template-columns: 1fr;
+      margin-top: 40px;
+    }
+
+    .phase-card { padding: 28px 20px; }
+
+    .growth-chart { padding: 24px 20px; }
+
+    .chart-bars {
+      height: 160px;
+      gap: 10px;
+    }
+
+    .chart-bar-wrap { height: 140px; }
+
+    .chart-bar { width: 14px; }
+
+    .chart-val { font-size: 11px; }
+
+    /* Growth chart legend — stack on mobile */
+    .growth-chart > div:last-child {
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .growth-chart > div:last-child span:last-child {
+      margin-left: 0;
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    /* PRE-IPO */
+    .preiipo-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .preiipo-body { font-size: 14px; }
+    .advantage { padding: 22px 20px; }
+
+    /* EXIT */
+    .exit-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .exit-comparison {
+      grid-template-columns: 1fr;
+    }
+
+    .lse-block { padding: 28px; }
+    .lse-block-title { font-size: 22px; }
+
+    /* EXIT info panels */
+    #exit > div.exit-layout > div:last-child > div {
+      padding: 24px !important;
+    }
+
+    /* TERMS */
+    .terms-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .terms-card { padding: 32px 24px; }
+    .terms-price { font-size: 52px; }
+
+    .return-item {
+      padding: 24px 20px;
+      gap: 12px;
+    }
+
+    .return-pct { font-size: 36px; }
+    .return-pct span { font-size: 18px; }
+    .return-context { max-width: 160px; font-size: 11px; }
+
+    /* TEAM */
+    .team-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .team-card { padding: 28px 20px; }
+
+    /* URGENCY */
+    .urgency-layout {
+      grid-template-columns: 1fr;
+      gap: 40px;
+      margin-top: 0;
+    }
+
+    .urgency-headline {
+      font-size: clamp(34px, 9vw, 56px);
+      margin-bottom: 24px;
+    }
+
+    .urgency-body { font-size: 14px; }
+
+    .window-stage {
+      padding: 18px 16px;
+      gap: 14px;
+    }
+
+    .stage-icon {
+      width: 28px;
+      height: 28px;
+      font-size: 9px;
+      flex-shrink: 0;
+    }
+
+    .stage-price { font-size: 18px; }
+
+    /* CTA */
+    .cta-headline {
+      font-size: clamp(38px, 10vw, 64px);
+    }
+
+    .cta-sub {
+      font-size: 14px;
+      margin-bottom: 40px;
+    }
+
+    .cta-buttons {
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn-primary,
+    .btn-secondary {
+      width: 100%;
+      text-align: center;
+      padding: 18px 24px;
+    }
+
+    .cta-disclaimer {
+      font-size: 9px;
+      letter-spacing: 0.06em;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 28px 20px;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .footer-note {
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+  }
+</style>
+</head>
+<body>
+
+<!-- MOBILE NAV DRAWER -->
+<div class="nav-drawer" id="navDrawer">
+  <a href="#thesis" onclick="closeDrawer()">Thesis</a>
+  <a href="#what" onclick="closeDrawer()">The Platform</a>
+  <a href="#revenue" onclick="closeDrawer()">Economics</a>
+  <a href="#capital" onclick="closeDrawer()">Capital</a>
+  <a href="#preiipo" onclick="closeDrawer()">Pre-IPO</a>
+  <a href="#terms" onclick="closeDrawer()">Terms</a>
+  <a href="#team" onclick="closeDrawer()">Team</a>
+  <a href="#cta" class="drawer-cta" onclick="closeDrawer()">Request Access</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">En<span>x</span>ergy</div>
+  <ul class="nav-links">
+    <li><a href="#what">The Platform</a></li>
+    <li><a href="#revenue">Economics</a></li>
+    <li><a href="#capital">Capital</a></li>
+    <li><a href="#preiipo">Pre-IPO</a></li>
+    <li><a href="#terms">Terms</a></li>
+    <li><a href="#team">Team</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Request Access</a>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu" onclick="toggleDrawer()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-tag">Pre-IPO Investment Memorandum · 2026</div>
+  <h1 class="hero-headline">The energy<br>the world<br><em>can't turn off.</em></h1>
+  <p class="hero-sub">Enxergy is building the UK's first advanced plastic-to-circular-feedstock platform. Sovereign supply chain. Defined exit. Pre-construction entry.</p>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="hero-stat-val">£<span class="counter" data-target="10.3">0</span>M</div>
+      <div class="hero-stat-label">First Site Revenue</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val"><span class="counter" data-target="57">0</span><span>%</span></div>
+      <div class="hero-stat-label">EBITDA Margin</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">£<span class="counter" data-target="121">0</span>M</div>
+      <div class="hero-stat-label">Platform Revenue Y5</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-val">£<span>0.32</span></div>
+      <div class="hero-stat-label">Share Price</div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- THESIS -->
+<section id="thesis">
+  <div class="section-label reveal">Investment Thesis</div>
+  <h2 class="section-headline reveal">Why this, <em>why now.</em></h2>
+  <div class="thesis-grid">
+    <div class="thesis-body reveal">
+      <p>The global energy order has fractured. Nord Stream is gone. Qatari LNG capacity has been destroyed. NATO's security umbrella is under question. US LNG exports have surged tenfold in a decade — not as a sign of market health, but as a sign of a market in crisis.</p>
+      <p>Every energy vulnerability exposed by these events shares one characteristic: dependency on something outside national borders. A pipeline crossing international territory. An LNG tanker route through contested waters. A supplier relationship built on a geopolitical alliance that no longer holds.</p>
+      <p>Enxergy has none of those vulnerabilities. By design. The feedstock is domestic plastic waste — generated within the UK, processed within the UK, supplying energy within the UK. The entire supply chain operates inside a single sovereign jurisdiction.</p>
+      <p>The most valuable energy asset in the world right now is one that nobody else can turn off. That is what Enxergy is building.</p>
+    </div>
+    <div class="thesis-points reveal reveal-delay-2">
+      <div class="thesis-point">
+        <div class="thesis-point-num">01</div>
+        <div class="thesis-point-title">Sovereign Supply Chain</div>
+        <div class="thesis-point-body">No foreign pipeline. No LNG tanker route. No geopolitical alliance dependency. Input to output within UK borders.</div>
+      </div>
+      <div class="thesis-point">
+        <div class="thesis-point-num">02</div>
+        <div class="thesis-point-title">First Mover Position</div>
+        <div class="thesis-point-body">The UK's first dedicated advanced plastic recovery platform. High replication barriers. Regulatory complexity protects the lead.</div>
+      </div>
+      <div class="thesis-point">
+        <div class="thesis-point-num">03</div>
+        <div class="thesis-point-title">Defined Exit Mechanism</div>
+        <div class="thesis-point-body">Merger with an already-listed LSE company. No IPO uncertainty. No underwriting risk. Structural liquidity from day one.</div>
+      </div>
+      <div class="thesis-point">
+        <div class="thesis-point-num">04</div>
+        <div class="thesis-point-title">Near-Term Construction</div>
+        <div class="thesis-point-body">Capital raise June 2026. Construction Q3–Q4 2026. Operational plant Q4 2027. The timeline is months, not years.</div>
+      </div>
+      <div class="thesis-point">
+        <div class="thesis-point-num">05</div>
+        <div class="thesis-point-title">Policy Tailwind</div>
+        <div class="thesis-point-body">Extended Producer Responsibility, Plastic Packaging Tax reform, export scrutiny. Regulation and capital are moving toward exactly this model.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT -->
+<section id="what">
+  <div class="section-label reveal">The Platform</div>
+  <h2 class="section-headline reveal">Not a sustainability story.<br><em>An industrial platform.</em></h2>
+  <div class="what-layout">
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <div class="step-title">Controlled Waste Acceptance</div>
+          <div class="step-desc">Defined feedstock specifications. Quality control at intake. Hard-to-recycle plastic films and lower-grade streams — the most abundant and underserved waste pool in the UK.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <div class="step-title">Pretreatment & Conditioning</div>
+          <div class="step-desc">Feed conditioning, buffering, dosing and contamination control. Material preparation to protect downstream quality and protect conversion efficiency.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <div class="step-title">Thermal Conversion</div>
+          <div class="step-desc">Industrial pyrolysis under controlled conditions with integrated process monitoring. HAZID/HAZOP completed. Real engineering, not marketing claims.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div class="step-content">
+          <div class="step-title">Staged Condensation & Product Handling</div>
+          <div class="step-desc">Multi-stage separation producing defined oil fractions to specification. Tankage, quality assurance and preparation for commercial offtake delivery.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">05</div>
+        <div class="step-content">
+          <div class="step-title">Site-Wide Operating Systems</div>
+          <div class="step-desc">SCADA and real-time monitoring. Control, safety, emissions, compliance. The larger value sits in industrial discipline and the ability to replicate a proven model.</div>
+        </div>
+      </div>
+    </div>
+    <div class="what-right reveal reveal-delay-2">
+      <div class="yield-block">
+        <div class="yield-big">80%</div>
+        <div class="yield-label">Conversion yield — plastic waste to circular oil</div>
+      </div>
+      <div class="stat-row">
+        <div class="stat-cell">
+          <div class="stat-cell-val">9,900t</div>
+          <div class="stat-cell-label">Tonnes input / yr</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-val">7,920t</div>
+          <div class="stat-cell-label">PDO output / yr</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-val">34,000</div>
+          <div class="stat-cell-label">Sq ft — first site</div>
+        </div>
+        <div class="stat-cell">
+          <div class="stat-cell-val">8</div>
+          <div class="stat-cell-label">Site fleet target</div>
+        </div>
+      </div>
+      <div style="margin-top: 24px; padding: 32px; background: var(--panel); border: 1px solid var(--border);">
+        <div class="section-label" style="margin-bottom: 14px;">Flagship Site</div>
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.7;">A brownfield industrial facility — a former plastics-processing location giving Enxergy a materially more credible starting point than a greenfield concept. Planning work advanced with positive pre-application engagement achieved. The first site is not a demonstration — it is the operating template for the entire platform.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE -->
+<section id="revenue">
+  <div class="section-label reveal">Unit Economics</div>
+  <h2 class="section-headline reveal">Three revenue legs.<br><em>One industrial flow.</em></h2>
+  <div class="revenue-layout">
+    <div class="revenue-bars reveal">
+      <div class="rev-bar-item">
+        <div class="rev-bar-header">
+          <div class="rev-bar-name">Circular Oil Sales (PDO)</div>
+          <div class="rev-bar-pct">65%</div>
+        </div>
+        <div class="rev-bar-val">£6.7M — Primary revenue anchor. Plastic-derived oil sold into petrochemical feedstock markets and circular supply chains.</div>
+        <div class="rev-bar-track"><div class="rev-bar-fill pdo"></div></div>
+      </div>
+      <div class="rev-bar-item" style="margin-top: 32px;">
+        <div class="rev-bar-header">
+          <div class="rev-bar-name">Packaging Recovery Notes (PRN)</div>
+          <div class="rev-bar-pct">20%</div>
+        </div>
+        <div class="rev-bar-val">£2.1M — Regulatory-linked value tied to UK recycling targets. PRN income from verified processing.</div>
+        <div class="rev-bar-track"><div class="rev-bar-fill prn"></div></div>
+      </div>
+      <div class="rev-bar-item" style="margin-top: 32px;">
+        <div class="rev-bar-header">
+          <div class="rev-bar-name">Gate Fee Income</div>
+          <div class="rev-bar-pct">15%</div>
+        </div>
+        <div class="rev-bar-val">£1.5M — Waste acceptance charges from operators redirecting hard-to-recycle plastic fractions.</div>
+        <div class="rev-bar-track"><div class="rev-bar-fill gate"></div></div>
+      </div>
+      <div style="margin-top: 48px; padding: 32px; background: var(--panel); border: 1px solid var(--border);">
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.7;">The model acquires feedstock at low cost — in some cases on economically favourable terms where operators pay to redirect waste — and converts it into a materially higher-value circular oil product. The principal cost burden sits upfront in capex, not in the recurring operating base. Once operational, the model is capital-light to run.</div>
+      </div>
+    </div>
+    <div class="revenue-summary reveal reveal-delay-2">
+      <div class="pl-row">
+        <div class="pl-label">Circular Oil (PDO)</div>
+        <div class="pl-val">£6.7M</div>
+      </div>
+      <div class="pl-row">
+        <div class="pl-label">PRN Income</div>
+        <div class="pl-val">£2.1M</div>
+      </div>
+      <div class="pl-row">
+        <div class="pl-label">Gate Fees</div>
+        <div class="pl-val">£1.5M</div>
+      </div>
+      <div class="pl-row total">
+        <div class="pl-label">Total Revenue</div>
+        <div class="pl-val">£10.3M</div>
+      </div>
+      <div class="pl-row">
+        <div class="pl-label">Operating Costs</div>
+        <div class="pl-val" style="color: rgba(200,80,80,0.7);">–£4.4M</div>
+      </div>
+      <div class="pl-row ebitda">
+        <div class="pl-label">EBITDA</div>
+        <div style="display: flex; align-items: baseline; gap: 8px;">
+          <div class="pl-val">£5.9M</div>
+          <div class="pl-margin">57%</div>
+        </div>
+      </div>
+      <div style="margin-top: 24px; padding: 24px; background: var(--gold-faint); border: 1px solid rgba(201,168,76,0.2);">
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 10px;">Platform Trajectory</div>
+        <div style="font-size: 13px; color: rgba(245,242,236,0.65); line-height: 1.65;">From £10.3M first-site revenue to £121M platform revenue by 2031 across 8 sites. EBITDA margin improves from 31% at 1 site to 61% at full fleet — operational gearing from a repeatable model.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARKET -->
+<section id="market">
+  <div class="section-label reveal">Market Opportunity</div>
+  <h2 class="section-headline reveal">A waste pool the market<br><em>hasn't solved.</em></h2>
+  <div class="market-grid reveal">
+    <div class="market-card">
+      <div class="market-card-num">2M</div>
+      <div class="market-card-unit">Tonnes per year</div>
+      <div class="market-card-title">UK Plastic Packaging Waste</div>
+      <div class="market-card-body">The UK generates 2 million tonnes of plastic packaging waste annually. Flexible films and lower-grade streams remain the hardest to handle — and the most abundant opportunity.</div>
+    </div>
+    <div class="market-card">
+      <div class="market-card-num">800K</div>
+      <div class="market-card-unit">Tonnes unrecycled</div>
+      <div class="market-card-title">Polyolefins Without a Route</div>
+      <div class="market-card-body">800,000 tonnes of polyolefins have no viable recycling pathway today. Each Enxergy site requires less than 2% of this pool. No heroic assumptions required to fill the feedstock position.</div>
+    </div>
+    <div class="market-card">
+      <div class="market-card-num">&lt;2%</div>
+      <div class="market-card-unit">Of unrecycled polyolefins</div>
+      <div class="market-card-title">Required Per Project</div>
+      <div class="market-card-body">The waste pool is structurally deep and commercially under-served. Export and incineration pathways are becoming more expensive and more scrutinised. Domestic circular processing is not a preference — it is becoming mandatory.</div>
+    </div>
+  </div>
+  <div style="margin-top: 1px; background: var(--border); border: 1px solid var(--border);">
+    <div style="display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border);">
+      <div style="background: var(--panel); padding: 32px;">
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px;">Policy</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 8px;">Extended Producer Responsibility</div>
+        <div style="font-size: 12px; color: var(--muted); line-height: 1.55;">Producers increasingly required to fund and manage packaging recovery — creating demand for credible domestic processing.</div>
+      </div>
+      <div style="background: var(--panel); padding: 32px;">
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px;">Tax</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 8px;">Plastic Packaging Tax Reform</div>
+        <div style="font-size: 12px; color: var(--muted); line-height: 1.55;">Reform pushing demand for domestic recycled content solutions and penalising non-circular packaging.</div>
+      </div>
+      <div style="background: var(--panel); padding: 32px;">
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px;">Trade</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 8px;">Export Route Scrutiny</div>
+        <div style="font-size: 12px; color: var(--muted); line-height: 1.55;">Tightening rules on waste exports creating urgent domestic processing demand for hard-to-recycle fractions.</div>
+      </div>
+      <div style="background: var(--panel); padding: 32px;">
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--green-mid); margin-bottom: 10px;">Compliance</div>
+        <div style="font-size: 13px; font-weight: 600; color: var(--white); margin-bottom: 8px;">Traceability Requirements</div>
+        <div style="font-size: 12px; color: var(--muted); line-height: 1.55;">Stronger compliance and traceability driving industrial demand for verified circular feedstocks.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GEOPOLITICAL -->
+<section id="geo">
+  <div class="geo-bg"></div>
+  <div class="section-label reveal">Geopolitical Case</div>
+  <h2 class="section-headline reveal">The world changed.<br><em>Enxergy was built for it.</em></h2>
+  <div class="geo-layout">
+    <div>
+      <div class="geo-body reveal">
+        <p>The assumptions that underpinned energy security for 30 years have collapsed in real time. Energy is no longer a commodity. It is a geopolitical weapon, a national security asset, and the single most contested resource on the planet.</p>
+        <p>US oil exports surged from under 500,000 barrels per day in 2016 to 5.2 million barrels per day in April 2026 — a tenfold increase in a decade. The US is now the world's largest LNG exporter, having filled the vacuum left by destroyed supply routes and collapsed supplier relationships. This is not market health. It is market crisis.</p>
+      </div>
+      <div class="geo-quote reveal reveal-delay-1">The most valuable energy asset in the world right now is one that nobody else can turn off. That is what Enxergy is.
+      </div>
+      <div class="geo-body reveal">
+        <p>Insurance and financing costs for energy infrastructure with foreign supply dependencies are rising. Infrastructure with genuinely domestic supply chains is becoming materially cheaper to insure and finance — a structural cost advantage that compounds over time. Enxergy is not chasing that trend. It was structured before it became obvious.</p>
+      </div>
+    </div>
+    <div>
+      <div class="geo-events reveal reveal-delay-2">
+        <div class="geo-event">
+          <div class="geo-event-title">Nord Stream Sabotage</div>
+          <div class="geo-event-body">Germany went overnight from energy dependency on Russian gas through fixed infrastructure to scrambling for US LNG at significantly higher cost. A single event destroyed decades of energy infrastructure and forced an entire continent to rethink its supply strategy.</div>
+        </div>
+        <div class="geo-event">
+          <div class="geo-event-title">Qatari LNG Facility Destruction</div>
+          <div class="geo-event-body">Further concentrated global LNG supply dependency on the US, with US LNG exports to the Middle East increasing 147% as a direct consequence. The Middle East — historically a net energy exporter — is now partially dependent on US energy imports.</div>
+        </div>
+        <div class="geo-event">
+          <div class="geo-event-title">NATO Cohesion Under Pressure</div>
+          <div class="geo-event-body">US withdrawal from or significant reduction of its NATO commitment removes the security umbrella that underpinned European energy infrastructure assumptions for 75 years. Energy sovereignty is now a genuine national security imperative.</div>
+        </div>
+      </div>
+      <div class="geo-moat reveal reveal-delay-3">
+        <div class="geo-moat-title">Why Enxergy Has None of These Vulnerabilities</div>
+        <div class="moat-items">
+          <div class="moat-item">No pipeline crossing international borders</div>
+          <div class="moat-item">No LNG tanker route through contested waters</div>
+          <div class="moat-item">No foreign supplier whose government can restrict exports</div>
+          <div class="moat-item">No dependence on any alliance or trade agreement</div>
+          <div class="moat-item">No exposure to currency risk, shipping cost inflation, or foreign infrastructure failure</div>
+          <div class="moat-item">Feedstock is domestic waste — generated, processed and consumed within UK borders</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAPITAL -->
+<section id="capital">
+  <div class="section-label reveal">Capital Structure</div>
+  <h2 class="section-headline reveal">Professionally structured.<br><em>Sequenced to the build.</em></h2>
+  <div class="capital-layout">
+    <div>
+      <div class="capital-stack reveal">
+        <div class="capital-tranche primary">
+          <div class="tranche-type">Bond Raise — SPV Structure</div>
+          <div class="tranche-amount">£25M</div>
+          <div class="tranche-desc">Opening end of June 2026. Structured across Special Purpose Vehicles at £5M per SPV. Each vehicle ring-fenced from the others — risk contained, raise structured in defined tranches.</div>
+        </div>
+        <div class="capital-tranche">
+          <div class="tranche-type">Separate Investment Vehicle</div>
+          <div class="tranche-amount">£25M</div>
+          <div class="tranche-desc">£2M deployed early June 2026. £23M in tranches from July and August — milestone-linked to construction start. Two independent capital sources both committed to the same project.</div>
+        </div>
+      </div>
+      <div class="capital-total reveal reveal-delay-1">
+        <div class="capital-total-label">Total Committed Capital</div>
+        <div class="capital-total-val">£50M</div>
+        <div class="capital-total-note">Against a £27.7M first-site build cost. Total capital exceeds build cost — providing working capital, operational runway, and a buffer against overrun. The project does not operate on a knife-edge budget.</div>
+      </div>
+    </div>
+    <div class="capital-right reveal reveal-delay-2">
+      <div class="spv-explainer">
+        <div class="spv-title">Why the SPV Structure Matters</div>
+        <div class="spv-body">Each SPV is a legally separate entity created to hold a defined investment. Structuring across multiple SPVs at £5M each means the risk of any single vehicle is contained — it does not cascade across the entire raise. The raise proceeds in defined, manageable tranches rather than as an all-or-nothing event. For the investor, this provides legal and financial clarity: a defined vehicle, defined assets, defined terms — not a general pool of capital with diffuse application.</div>
+      </div>
+      <div class="timeline-items">
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-date">Early June 2026</div>
+            <div class="tl-event">£2M First Tranche Deployed</div>
+            <div class="tl-note">Separate investment vehicle opens. Capital commitment confirmed.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-date">End of June 2026</div>
+            <div class="tl-event">£25M Bond Raise Opens</div>
+            <div class="tl-note">SPV structure activates across five £5M vehicles.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-date">July — August 2026</div>
+            <div class="tl-event">£23M Deployed in Tranches</div>
+            <div class="tl-note">Milestone-linked deployment aligned to construction readiness.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-date">Q3 — Q4 2026</div>
+            <div class="tl-event">Construction Begins</div>
+            <div class="tl-note">Site mobilisation. Engineering and construction phase commences.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot"></div>
+          <div class="tl-content">
+            <div class="tl-date">Q4 2027 (at latest)</div>
+            <div class="tl-event">Operational Plant</div>
+            <div class="tl-note">11–14 month build window. Narrow range indicates well-understood construction process.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background: var(--green-mid);"></div>
+          <div class="tl-content">
+            <div class="tl-date">Late 2027 — Mid 2028</div>
+            <div class="tl-event">Merger & LSE Listing</div>
+            <div class="tl-note">Merger with already-listed company completes. Pre-IPO window closes permanently.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ROADMAP -->
+<section id="roadmap">
+  <div class="section-label reveal">Platform Roadmap</div>
+  <h2 class="section-headline reveal">One plant proves it.<br><em>Eight build the platform.</em></h2>
+  <div class="roadmap-phases reveal">
+    <div class="phase-card active">
+      <div class="phase-year">2026</div>
+      <div class="phase-title">Execution Readiness</div>
+      <div class="phase-items">
+        <div class="phase-item">FEED completion and engineering definition</div>
+        <div class="phase-item">Planning and permitting workstreams</div>
+        <div class="phase-item">Commercial finalisation</div>
+        <div class="phase-item">Long-lead procurement</div>
+        <div class="phase-item">IPO preparation Jun/Jul 2026</div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-year">2026–27</div>
+      <div class="phase-title">Build & First Production</div>
+      <div class="phase-items">
+        <div class="phase-item">Site mobilisation</div>
+        <div class="phase-item">Engineering and construction</div>
+        <div class="phase-item">Commissioning activity</div>
+        <div class="phase-item">First output generation</div>
+        <div class="phase-item">Plant begins to prove itself physically</div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-year">2027–28</div>
+      <div class="phase-title">Commercial Operations</div>
+      <div class="phase-items">
+        <div class="phase-item">Throughput optimisation</div>
+        <div class="phase-item">Stable uptime and quality</div>
+        <div class="phase-item">Offtake contract delivery</div>
+        <div class="phase-item">Operating rhythm stabilisation</div>
+        <div class="phase-item">Commercial flow maturity</div>
+      </div>
+    </div>
+    <div class="phase-card">
+      <div class="phase-year">2028+</div>
+      <div class="phase-title">Multi-Site Scale</div>
+      <div class="phase-items">
+        <div class="phase-item">Second and third sites</div>
+        <div class="phase-item">Larger format projects</div>
+        <div class="phase-item">Fleet-level procurement</div>
+        <div class="phase-item">Platform value realisation</div>
+        <div class="phase-item">~120,000 TPA fleet target</div>
+      </div>
+    </div>
+  </div>
+  <div class="growth-chart reveal">
+    <div class="chart-title">Platform Revenue & EBITDA — Illustrative Projection (£M)</div>
+    <div class="chart-bars">
+      <div class="chart-bar-group">
+        <div class="chart-bar-wrap">
+          <div class="chart-bar bar-rev" style="height: 7px;" data-delay="0.1"></div>
+          <div class="chart-bar bar-ebt" style="height: 0px;" data-delay="0.2"></div>
+        </div>
+        <div class="chart-year">2027</div>
+        <div class="chart-val">£4.3M</div>
+      </div>
+      <div class="chart-bar-group">
+        <div class="chart-bar-wrap">
+          <div class="chart-bar bar-rev" style="height: 27px;" data-delay="0.2"></div>
+          <div class="chart-bar bar-ebt" style="height: 8px;" data-delay="0.3"></div>
+        </div>
+        <div class="chart-year">2028</div>
+        <div class="chart-val">£16.1M</div>
+      </div>
+      <div class="chart-bar-group">
+        <div class="chart-bar-wrap">
+          <div class="chart-bar bar-rev" style="height: 70px;" data-delay="0.3"></div>
+          <div class="chart-bar bar-ebt" style="height: 34px;" data-delay="0.4"></div>
+        </div>
+        <div class="chart-year">2029</div>
+        <div class="chart-val">£42.1M</div>
+      </div>
+      <div class="chart-bar-group">
+        <div class="chart-bar-wrap">
+          <div class="chart-bar bar-rev" style="height: 136px;" data-delay="0.4"></div>
+          <div class="chart-bar bar-ebt" style="height: 77px;" data-delay="0.5"></div>
+        </div>
+        <div class="chart-year">2030</div>
+        <div class="chart-val">£82.1M</div>
+      </div>
+      <div class="chart-bar-group">
+        <div class="chart-bar-wrap">
+          <div class="chart-bar bar-rev" style="height: 180px;" data-delay="0.5"></div>
+          <div class="chart-bar bar-ebt" style="height: 122px;" data-delay="0.6"></div>
+        </div>
+        <div class="chart-year">2031</div>
+        <div class="chart-val">£121M</div>
+      </div>
+    </div>
+    <div style="display: flex; gap: 24px; font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.12em; color: var(--muted);">
+      <span style="display: flex; align-items: center; gap: 8px;"><span style="display: inline-block; width: 12px; height: 3px; background: var(--green-mid);"></span>Revenue</span>
+      <span style="display: flex; align-items: center; gap: 8px;"><span style="display: inline-block; width: 12px; height: 3px; background: rgba(64,145,108,0.35);"></span>EBITDA</span>
+      <span style="margin-left: auto;">Illustrative only — not a guarantee</span>
+    </div>
+  </div>
+</section>
+
+<!-- PRE-IPO -->
+<section id="preiipo">
+  <div class="preiipo-bg"></div>
+  <div class="section-label reveal">Pre-IPO Position</div>
+  <h2 class="section-headline reveal">The gap between<br><em>what you paid and what it's worth.</em></h2>
+  <div class="preiipo-layout">
+    <div class="preiipo-body reveal">
+      <p>Pre-IPO means the investor acquires a position before the company becomes publicly traded. The entry price is set by private negotiation at current project valuation — not by the open market. The open market has not yet had the opportunity to price this asset.</p>
+      <p>When it lists, the market will price the combined entity based on what Enxergy actually is at that point — an operational, revenue-generating plant that has completed its build, commenced production, and demonstrated that the model works in practice. The market will price the shares as an infrastructure asset in a sector that has never been more strategically important.</p>
+      <p>The pre-IPO investor paid for the project before any of that value was visible. The gap between what they paid and what the market subsequently values it at is the return. That gap is structural — it exists because public markets price demonstrated, measurable value. They cannot price operational value that does not yet exist.</p>
+      <p>The pre-IPO investor is compensated for two things simultaneously: taking on the construction and execution risk the public market will not take on, and providing capital at a stage when the project needs it most. That compensation is a lower entry price than the post-listing market price — permanently.</p>
+    </div>
+    <div class="preiipo-advantages reveal reveal-delay-2">
+      <div class="advantage">
+        <div class="adv-title">Exit Mechanism Already Defined</div>
+        <div class="adv-body">Merger with a company already listed on the London Stock Exchange. The listing pathway does not need to be created or approved — it already exists. This removes the single greatest source of exit uncertainty in pre-IPO investment.</div>
+      </div>
+      <div class="advantage">
+        <div class="adv-title">Defined, Near-Term Timeline</div>
+        <div class="adv-body">Construction Q3–Q4 2026. Build 11–14 months. Merger and listing follow the operational plant. Listing horizon of late 2027 to mid-2028. A defined holding period, not an open-ended commitment.</div>
+      </div>
+      <div class="advantage">
+        <div class="adv-title">Infrastructure, Not a Startup</div>
+        <div class="adv-body">When Enxergy lists, the market prices a physical energy plant with proven output capacity — not a technology bet dependent on future customer acquisition. Infrastructure assets with demonstrable output trade at significant multiples in public markets.</div>
+      </div>
+      <div class="advantage">
+        <div class="adv-title">The Window Is Structural, Not Manufactured</div>
+        <div class="adv-body">The pre-IPO window closes when the listing occurs. Not because anyone decided to close it — because the event that defined the window has ceased to exist. The company is listed. Pre-IPO pricing, by definition, is no longer available. This is not a sales tactic. It is a mathematical reality.</div>
+      </div>
+      <div class="advantage">
+        <div class="adv-title">Entry Price Rises at Every Stage</div>
+        <div class="adv-body">As each milestone passes — capital raise completes, construction begins, plant progresses — the risk profile improves and the justified valuation rises. The investor who comes in today pays the pre-construction price. Every stage that completes after entry increases the value of the position without further action required.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXIT -->
+<section id="exit">
+  <div class="section-label reveal">LSE Exit Mechanism</div>
+  <h2 class="section-headline reveal">How you actually<br><em>get your money back.</em></h2>
+  <div class="exit-layout">
+    <div>
+      <div class="exit-comparison reveal">
+        <div class="exit-col bad">
+          <div class="exit-col-title">Traditional IPO</div>
+          <div class="exit-items">
+            <div class="exit-item">12–24 months to listing, cost millions in fees</div>
+            <div class="exit-item">Underwriting process can fail at any stage</div>
+            <div class="exit-item">Dependent on market conditions at one specific moment</div>
+            <div class="exit-item">Roadshow can fail to generate sufficient demand</div>
+            <div class="exit-item">FCA regulatory scrutiny on unknown timeline</div>
+            <div class="exit-item">IPO can be pulled days before listing</div>
+          </div>
+        </div>
+        <div class="exit-col good">
+          <div class="exit-col-title">Enxergy — Merger Route</div>
+          <div class="exit-items">
+            <div class="exit-item">Merging with an already-listed LSE company</div>
+            <div class="exit-item">Regulatory approval already completed</div>
+            <div class="exit-item">Underwriting process eliminated entirely</div>
+            <div class="exit-item">Roadshow dependency removed</div>
+            <div class="exit-item">Market timing risk dramatically reduced</div>
+            <div class="exit-item">Market makers arranged from day one</div>
+          </div>
+        </div>
+      </div>
+      <div class="lse-block reveal reveal-delay-1">
+        <div class="lse-block-title">The London Stock Exchange Exit</div>
+        <div class="lse-block-body">Once the merger completes and the combined entity lists, investors sell their shares exactly as they would sell any publicly listed stock — through a standard brokerage account, at the public market price, on their own timeline. They choose when to sell. They choose how much to sell. They are not waiting for an acquirer to make a bid. They are not subject to the company's management deciding the timing is right. Their shares are their own to dispose of on their own terms.</div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div style="padding: 40px; background: var(--panel); border: 1px solid var(--border); margin-bottom: 24px;">
+        <div class="section-label" style="margin-bottom: 16px;">Market Makers — Arranged</div>
+        <div style="font-size: 14px; color: rgba(245,242,236,0.65); line-height: 1.75;">Market makers have been arranged through existing connections alongside the listing assistance for the combined entity. Market makers commit to continuously quoting both a buy price and a sell price throughout market hours. Their presence means there is always a willing buyer available. Pre-IPO investors entering this stock have structured liquidity from day one — not hoping liquidity will emerge organically.</div>
+      </div>
+      <div style="padding: 40px; background: var(--panel); border: 1px solid var(--border);">
+        <div class="section-label" style="margin-bottom: 16px;">Why This Changes the Risk Profile</div>
+        <div style="font-size: 14px; color: rgba(245,242,236,0.65); line-height: 1.75;">The vast majority of pre-IPO investments ask the investor to accept the full risk of the traditional IPO process. They are betting not only that the business succeeds but also that market conditions are favourable, the regulatory process proceeds without delays, underwriting succeeds, and the roadshow generates demand. Each of those dependencies is a separate risk sitting between the investor and their exit. Enxergy's merger structure removes those dependencies almost entirely.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TERMS -->
+<section id="terms">
+  <div class="section-label reveal">Investment Opportunity</div>
+  <h2 class="section-headline reveal">Entry before<br><em>the platform is built.</em></h2>
+  <div class="terms-layout">
+    <div class="terms-card reveal">
+      <div class="terms-price">£0.32</div>
+      <div class="terms-price-label">Per Share — Current Reference Price</div>
+      <div class="terms-rows">
+        <div class="terms-row">
+          <div class="terms-row-label">Selling Shareholder</div>
+          <div class="terms-row-val">Zavion Vision B.V.</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Shares Offered</div>
+          <div class="terms-row-val">30,000,000 existing shares</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Total Offering Value</div>
+          <div class="terms-row-val">£9,600,000</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Total Shares Issued</div>
+          <div class="terms-row-val">600,000,000</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Implied Equity Value</div>
+          <div class="terms-row-val">£192M</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Entity</div>
+          <div class="terms-row-val">Enxergy Limited (Private)</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Company Number</div>
+          <div class="terms-row-val">17069775</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Exit Route</div>
+          <div class="terms-row-val">Merger — London Stock Exchange</div>
+        </div>
+        <div class="terms-row">
+          <div class="terms-row-label">Listing Horizon</div>
+          <div class="terms-row-val">Late 2027 — Mid 2028</div>
+        </div>
+      </div>
+    </div>
+    <div class="returns-card reveal reveal-delay-2">
+      <div style="padding: 20px 0 28px; border-bottom: 1px solid var(--border); margin-bottom: 1px;">
+        <div style="font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px;">Illustrative Value Development</div>
+        <div style="font-size: 13px; color: rgba(245,242,236,0.4); line-height: 1.5;">From £0.32 / £192M implied equity value. Illustrative only — not a guarantee.</div>
+      </div>
+      <div class="return-item">
+        <div>
+          <div class="return-horizon">12 Months</div>
+          <div style="font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px;">£330M — £360M</div>
+          <div class="return-context">Funding close, visible first-site execution, material delivery risk reduced</div>
+        </div>
+        <div class="return-pct">+72<span>–88%</span></div>
+      </div>
+      <div class="return-item">
+        <div>
+          <div class="return-horizon">24 Months</div>
+          <div style="font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px;">£490M — £560M</div>
+          <div class="return-context">First site stabilised, commercial proof established, wider rollout beginning to de-risk</div>
+        </div>
+        <div class="return-pct">+155<span>–192%</span></div>
+      </div>
+      <div class="return-item">
+        <div>
+          <div class="return-horizon">5 Years</div>
+          <div style="font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 6px;">£1.02BN — £1.34BN</div>
+          <div class="return-context">Material delivery against platform plan, approaching scaled multi-site value</div>
+        </div>
+        <div class="return-pct">+431<span>–598%</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team">
+  <div class="section-label reveal">Leadership</div>
+  <h2 class="section-headline reveal">The team that<br><em>executes the plan.</em></h2>
+  <div class="team-grid reveal">
+    <div class="team-card">
+      <div class="team-name">Nick Hodson</div>
+      <div class="team-role">CEO-Designate</div>
+      <div class="team-bio">Founder of Intelligent Renewables Ltd with over a decade of experience in chemical recycling and pyrolysis. Built partnerships with leading global energy and polymer companies and advanced projects toward commercial delivery. Drives the vision and network for Enxergy's growth as a leader in sustainable green oil production.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Ian Tordoff</div>
+      <div class="team-role">Non-Executive Chairman</div>
+      <div class="team-bio">Expertise managing engineering and logistics groups. Led more than US$6bn of corporate assignments on behalf of international service providers. Ex-Big Four. Main board, NED and advisory board positions across a range of public and private organisations.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Brigadier (Ret'd) Iain McNeil OBE</div>
+      <div class="team-role">Non-Executive Director</div>
+      <div class="team-bio">Decades of leadership from the British Army and commercial sector. Scaled an international recruitment business. Served as Chair and Non-Executive Director across multiple organisations. Brings strategic governance, fiscal discipline, and board-level oversight.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Neil Clayton</div>
+      <div class="team-role">Chief Financial Officer</div>
+      <div class="team-bio">Extensive background spanning listed companies, corporate restructuring, and strategic financial management. Strong track record in the financial and energy sectors having served in senior roles across multiple publicly listed companies.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">Wade Pritchard</div>
+      <div class="team-role">Head of Engineering</div>
+      <div class="team-bio">Over 25 years in project management, contract oversight, mechanical engineering, and large-scale site construction. Renowned for executing challenging projects safely, on schedule, and within budget.</div>
+    </div>
+    <div class="team-card">
+      <div class="team-name">David Ryan</div>
+      <div class="team-role">Senior Technical Adviser</div>
+      <div class="team-bio">Decades of leadership across the energy sector spanning coal, nuclear, oil and gas, hydrogen and energy transition projects. CEO, project director, and founder of multiple companies. Proven track record in initiating projects, securing funding, and scaling innovative technologies.</div>
+    </div>
+  </div>
+</section>
+
+<!-- URGENCY -->
+<section id="urgency">
+  <div class="urgency-bg"></div>
+  <div class="section-label reveal">The Window</div>
+  <div class="urgency-layout">
+    <div>
+      <div class="urgency-headline reveal">The pre-IPO window closes<br>when the <em>listing occurs.</em><br>It does not reopen.</div>
+      <div class="urgency-body reveal reveal-delay-1">
+        <p>Sophisticated investors have encountered artificial deadlines so many times they have developed a specific scepticism toward any urgency framing. That scepticism is well-founded. It is also, in the context of Enxergy's pre-IPO window, entirely misplaced.</p>
+        <p>The urgency here is not manufactured. It is structural, mathematical, and irreversible. The window closes not because anyone decided to close it — but because the event that defined the window has ceased to exist. The company is now listed. Pre-IPO pricing, by definition, is no longer available for a listed company.</p>
+        <p>The decision to delay is not a neutral act. It is a decision to pay a higher price for the same underlying asset, at a later point in time, with less upside remaining because the most significant value-creating milestones will already have passed.</p>
+      </div>
+    </div>
+    <div class="window-stages reveal reveal-delay-2">
+      <div class="window-stage">
+        <div class="stage-icon">NOW</div>
+        <div class="stage-content">
+          <div class="stage-label">Pre-Construction Entry</div>
+          <div class="stage-note">Highest uncertainty. Lowest entry price. Maximum upside potential.</div>
+        </div>
+        <div class="stage-price">£0.32</div>
+      </div>
+      <div class="window-stage">
+        <div class="stage-icon">J</div>
+        <div class="stage-content">
+          <div class="stage-label">Capital Raise Completes</div>
+          <div class="stage-note">June 2026. Funding risk resolved. Entry price rises.</div>
+        </div>
+        <div class="stage-price">↑</div>
+      </div>
+      <div class="window-stage">
+        <div class="stage-icon">Q3</div>
+        <div class="stage-content">
+          <div class="stage-label">Construction Begins</div>
+          <div class="stage-note">Q3–Q4 2026. Project moves from paper to physical. Entry price rises again.</div>
+        </div>
+        <div class="stage-price">↑↑</div>
+      </div>
+      <div class="window-stage">
+        <div class="stage-icon">Q4</div>
+        <div class="stage-content">
+          <div class="stage-label">Plant Operational</div>
+          <div class="stage-note">Q4 2027 at latest. Execution risk largely eliminated.</div>
+        </div>
+        <div class="stage-price">↑↑↑</div>
+      </div>
+      <div class="window-stage closed">
+        <div class="stage-icon">LSE</div>
+        <div class="stage-content">
+          <div class="stage-label">LSE Listing — Window Closes</div>
+          <div class="stage-note">Public market sets price. Pre-IPO pricing gone permanently. No mechanism to recreate it.</div>
+        </div>
+        <div class="stage-price" style="color: rgba(200,80,80,0.5);">CLOSED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="cta">
+  <div class="cta-bg"></div>
+  <h2 class="cta-headline reveal">Enter before<br>the world <em>sees it.</em></h2>
+  <p class="cta-sub reveal reveal-delay-1">The pre-IPO window is open. The construction timeline is months away. Once the listing occurs, this entry price is gone permanently.</p>
+  <div class="cta-buttons reveal reveal-delay-2">
+    <a href="mailto:info@zaviongroup.com" class="btn-primary">Request Offering Materials</a>
+    <a href="tel:+442036086044" class="btn-secondary">+44 203 608 6044</a>
+  </div>
+  <div class="cta-disclaimer reveal reveal-delay-3">
+    This document is provided for informational purposes only and does not constitute an offer, solicitation, recommendation or guarantee of investment performance. Forward-looking statements, growth illustrations and value scenarios are indicative only. Actual outcomes may differ materially. An investment in shares involves risk and investors may lose part or all of their capital. Any decision to invest should be made only after careful consideration of the relevant legal documentation, risk factors and subscription terms. Enxergy Limited Company No. 17069775. Share offering coordinated through Zavion Vision B.V.
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">En<span>x</span>ergy</div>
+  <div class="footer-note">A Nexergy Group Company · Zavion Vision B.V. · info@zaviongroup.com · zaviongroup.com</div>
+</footer>
+
+<script>
+  // Intersection Observer for reveal animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => {
+      if (el.isIntersecting) {
+        el.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Bar animations
+  const barObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.rev-bar-fill').forEach((bar, i) => {
+          setTimeout(() => bar.classList.add('animated'), i * 200 + 300);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.revenue-bars').forEach(el => barObserver.observe(el));
+
+  // Chart bar animations
+  const chartObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.chart-bar').forEach((bar, i) => {
+          const delay = parseFloat(bar.dataset.delay || 0) * 1000;
+          setTimeout(() => bar.classList.add('animated'), delay);
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll('.growth-chart').forEach(el => chartObserver.observe(el));
+
+  // Counter animation
+  function animateCounter(el) {
+    const target = parseFloat(el.dataset.target);
+    const duration = 1800;
+    const start = performance.now();
+    const isDecimal = target % 1 !== 0;
+
+    function update(time) {
+      const elapsed = time - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      const val = eased * target;
+      el.textContent = isDecimal ? val.toFixed(1) : Math.round(val);
+      if (progress < 1) requestAnimationFrame(update);
+    }
+
+    requestAnimationFrame(update);
+  }
+
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounter(entry.target);
+        counterObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+  // Hamburger menu
+  function toggleDrawer() {
+    const drawer = document.getElementById('navDrawer');
+    const btn = document.getElementById('hamburger');
+    drawer.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function closeDrawer() {
+    const drawer = document.getElementById('navDrawer');
+    const btn = document.getElementById('hamburger');
+    drawer.classList.remove('open');
+    btn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
